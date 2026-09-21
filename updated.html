@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lupang Hinirang... Lupang Nilalason</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    box-sizing: border-box;
+    --ink:      #1B1C15;
+    --soil:     #3F3D26;
+    --rust:     #A8532B;
+    --toxic:    #9FB71C;
+    --paper:    #EAE7D6;
+    --paper-2:  #DEDABE;
+    --ash:      #6D6B52;
+    --line:     rgba(27,28,21,0.14);
+    --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --display: 'Oswald', 'IBM Plex Sans', sans-serif;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{ box-sizing: inherit; }
+  html{
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(64px + env(safe-area-inset-top, 0px));
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  img,svg{ max-width:100%; }
+
+  /* ---------- Nav ---------- */
+  nav.site-nav{
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 50;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 28px;
+    background: rgba(33,28,22,0.94);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(159,183,28,0.35);
+  }
+  .brand{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    white-space: nowrap;
+  }
+  .brand em{ font-style: normal; color: var(--toxic); }
+  .nav-links{
+    display:flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .nav-links a{
+    font-family: var(--sans);
+    font-size: 14px;
+    color: rgba(239,231,216,0.82);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 3px;
+    transition: color .15s ease, background .15s ease;
+  }
+  .nav-links a:hover,
+  .nav-links a:focus-visible{
+    color: var(--paper);
+    background: rgba(159,183,28,0.16);
+  }
+  .nav-links a:focus-visible{ outline: 2px solid var(--toxic); outline-offset: 2px; }
+
+  /* ---------- Hero ---------- */
+  section#home{
+    min-height: 88vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 78% 8%, rgba(159,183,28,0.16), transparent 50%),
+      radial-gradient(ellipse at 15% 90%, rgba(168,83,43,0.22), transparent 55%),
+      linear-gradient(180deg, #14150F 0%, #191A12 55%, #121309 100%);
+    color: var(--paper);
+    padding: 90px 8vw 70px;
+    overflow: hidden;
+  }
+  section#home::before{
+    /* subtle sludge/noise texture, self-contained SVG turbulence */
+    content:"";
+    position:absolute; inset:0;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+  section#home::after{
+    /* thin hazard stripe along the base of the hero, like caution tape */
+    content:"";
+    position:absolute; left:0; right:0; bottom:0;
+    height: 8px;
+    background: repeating-linear-gradient(-45deg, var(--toxic) 0 18px, #14150F 18px 36px);
+    opacity: 0.9;
+  }
+  .hero-eyebrow{
+    font-family: var(--display);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--toxic);
+    margin: 0 0 18px;
+    max-width: 46ch;
+    line-height: 1.5;
+  }
+  .hero-title{
+    font-family: var(--serif);
+    font-weight: 700;
+    line-height: 1.04;
+    margin: 0;
+    font-size: clamp(2.6rem, 7.2vw, 6rem);
+    max-width: 15ch;
+  }
+  .hero-title .fade{
+    color: rgba(239,231,216,0.34);
+  }
+  .hero-title .stark{
+    color: var(--paper);
+    display:block;
+  }
+  .hero-rule{
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--toxic), var(--rust));
+    margin: 34px 0 22px;
+    border: none;
+  }
+  .hero-sub{
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(239,231,216,0.78);
+    max-width: 52ch;
+    margin: 0 0 30px;
+  }
+  .hero-cta{
+    display:inline-flex;
+    align-items:center;
+    gap: 10px;
+    align-self: flex-start;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--toxic);
+    padding: 13px 22px;
+    border-radius: 3px;
+    text-decoration:none;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .hero-cta:hover{ background: #b3cc2e; transform: translateY(-1px); }
+  .hero-cta:focus-visible{ outline: 2px solid var(--paper); outline-offset: 3px; }
+
+  /* ---------- Content page ---------- */
+  section#land-pollution{
+    background: var(--paper);
+    padding: 76px 8vw 100px;
+  }
+  .content-wrap{
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .page-kicker{
+    font-family: var(--display);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--rust);
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+  h1.page-title{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    margin: 0 0 28px;
+    line-height: 1.12;
+  }
+  .toc{
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--toxic);
+    background: var(--paper-2);
+    padding: 18px 22px;
+    margin: 0 0 48px;
+    border-radius: 2px;
+  }
+  .toc-label{
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ash);
+    margin: 0 0 10px;
+  }
+  .toc ol{
+    margin:0; padding-left: 20px;
+    font-family: var(--sans);
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+  .toc a{ color: var(--soil); text-decoration: none; border-bottom: 1px solid transparent; }
+  .toc a:hover{ border-bottom-color: var(--rust); color: var(--rust); }
+
+  article p{
+    font-family: var(--serif);
+    font-size: 17.5px;
+    line-height: 1.72;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+  article h2{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 52px 0 18px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  article h2:first-of-type{ margin-top: 0; padding-top: 0; border-top: none; }
+  article h3{
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15.5px;
+    color: var(--soil);
+    margin: 26px 0 8px;
+  }
+  article ul{
+    margin: 0 0 24px;
+    padding-left: 20px;
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  article li{ margin-bottom: 4px; }
+  .cite{
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ash);
+  }
+
+  /* stat row */
+  .stat-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 8px 0 40px;
+  }
+  .stat{
+    background: var(--paper);
+    padding: 22px 18px;
+  }
+  .stat .num{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    color: var(--rust);
+    display:block;
+    line-height: 1.1;
+  }
+  .stat .label{
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--soil);
+    margin-top: 6px;
+    display:block;
+    line-height: 1.4;
+  }
+
+  /* references */
+  .refs{
+    margin-top: 60px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+  .refs h2{ margin-top: 0; padding-top: 0; border-top: none; }
+  .refs ol{
+    padding-left: 20px;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.9;
+    color: var(--ash);
+  }
+  .refs a{ color: var(--soil); }
+
+  footer{
+    text-align:center;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ash);
+    padding: 30px 8vw 46px;
+    background: var(--paper);
+  }
+
+  @media (max-width: 640px){
+    nav.site-nav{ padding: 12px 16px; flex-wrap: wrap; }
+    section#home{ padding: 70px 6vw 56px; min-height: 78vh; }
+    section#land-pollution{ padding: 56px 6vw 70px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Site">
+  <span class="brand">Lupang <em>Nilalason</em></span>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#land-pollution">What is Land Pollution?</a>
+  </div>
+</nav>
+
+<section id="home">
+  <p class="hero-eyebrow">A look at soil contamination in the Philippines</p>
+  <h1 class="hero-title">
+    <span class="fade">What is the Issue?</span>
+    <span class="stark">Lupang Hinirang... <span class="fade">/</span> Lupang Nilalason</span>
+  </h1>
+  <hr class="hero-rule">
+  <p class="hero-sub">Chosen in the anthem. Poisoned by us.</p>
+  <a class="hero-cta" href="#land-pollution">Read the report ↓</a>
+</section>
+
+<section id="land-pollution">
+  <div class="content-wrap">
+    <p class="page-kicker">Section 01</p>
+    <h1 class="page-title">What is Land Pollution?</h1>
+
+    <div class="toc">
+      <p class="toc-label">Table of contents</p>
+      <ol>
+        <li><a href="#definition">What is Land Pollution?</a></li>
+        <li><a href="#causes">Causes of Land Pollution</a></li>
+        <li><a href="#effects">Effects of Land Pollution</a></li>
+        <li><a href="#status">Current Status</a></li>
+        <li><a href="#references">References</a></li>
+      </ol>
+    </div>
+
+    <article>
+      <h2 id="definition">What is Land Pollution?</h2>
+      <p>Land pollution occurs when waste, chemicals, or other harmful materials contaminate or degrade the land and soil. It may result from household garbage, industrial and hazardous waste, agricultural chemicals, petroleum products, construction debris, mining waste, and improperly managed wastewater.</p>
+      <p>Healthy soil supports plant growth, stores and filters water, cycles nutrients, and provides habitats for many organisms. When pollutants enter the soil, these natural functions may be damaged. Contaminants can also remain in the environment for long periods and may eventually reach crops, groundwater, rivers, animals, and people. <span class="cite">(United Nations Environment Programme, 2021)</span></p>
+
+      <h2 id="causes">Causes of Land Pollution</h2>
+      <p>In the Philippines, one major cause of land pollution is the improper disposal of solid waste. This includes littering, illegal dumping, leaving garbage in open dumps, burning waste, and disposing of unsegregated waste in places that are not authorised to receive it.</p>
+      <p>Republic Act No. 9003, or the Ecological Solid Waste Management Act of 2000, requires waste segregation, recycling, composting, proper collection, and environmentally safe disposal. The law prohibits littering, open burning, open dumping, collecting unsegregated waste, and dumping waste outside authorised facilities. Despite these requirements, improper waste disposal remains a problem in many communities. <span class="cite">(Republic Act No. 9003, 2001)</span></p>
+
+      <h3>Other causes include</h3>
+      <ul>
+        <li>Poor management of household and commercial waste</li>
+        <li>Improper disposal of industrial chemicals and hazardous materials</li>
+        <li>Excessive or incorrect use of pesticides and fertilisers</li>
+        <li>Disposal of electronic waste, batteries, oil, and medical waste with ordinary garbage</li>
+        <li>Mining activities and the release of mine tailings</li>
+        <li>Construction debris and uncontrolled urban development</li>
+        <li>Limited waste-collection, recycling, composting, and disposal facilities</li>
+        <li>Increasing population, consumption, and use of disposable products</li>
+      </ul>
+      <p>The United Nations Environment Programme identifies industrial activities, municipal and livestock waste, agrochemicals, and petroleum products as major human sources of soil pollution. <span class="cite">(UNEP, 2020)</span></p>
+
+      <h2 id="effects">Effects of Land Pollution</h2>
+      <p>Land pollution affects the environment and human communities in several ways.</p>
+
+      <h3>Soil degradation and reduced agricultural productivity</h3>
+      <p>Pollutants can disrupt the organisms and nutrients that keep soil healthy. High concentrations of toxic substances may reduce crop yields or make the land unsuitable for agriculture.</p>
+
+      <h3>Contamination of food and water</h3>
+      <p>Chemicals and heavy metals in polluted soil may be absorbed by crops. Rainwater can also carry pollutants into rivers, lakes, and groundwater. This creates possible risks for people who consume contaminated food or water. <span class="cite">(UNEP, Land and Soil Pollution)</span></p>
+
+      <h3>Damage to ecosystems</h3>
+      <p>Polluted land may destroy habitats, harm plants and animals, reduce biodiversity, and weaken the ability of ecosystems to recover from floods, droughts, and other environmental pressures.</p>
+
+      <h3>Health risks</h3>
+      <p>People may be exposed to pollutants through contaminated food, drinking water, dust, smoke from burning waste, or direct contact with hazardous materials. Waste workers, nearby communities, and children can be particularly vulnerable. The World Health Organization states that improper waste disposal can contaminate soil, water, and air and contribute to harmful health outcomes. <span class="cite">(World Health Organization, 2024)</span></p>
+
+      <h3>Flooding and disease</h3>
+      <p>Garbage discarded in canals and drainage systems can block the flow of water and worsen flooding. Accumulated waste and standing water may also provide breeding places for disease-carrying mosquitoes and other pests.</p>
+
+      <h2 id="status">Current Status</h2>
+      <p>The Environmental Management Bureau estimated that the Philippines would generate approximately 60,756.55 tons of solid waste per day in 2025 — around 22.18 million tons in one year. This number is a projection based partly on regional population data, not a complete measurement of all waste collected nationwide. <span class="cite">(Convention on Biological Diversity Online Reporting Tool, Philippine government submission)</span></p>
+
+      <div class="stat-grid">
+        <div class="stat"><span class="num">60,756.55</span><span class="label">tons of solid waste generated per day, projected for 2025</span></div>
+        <div class="stat"><span class="num">22.18M</span><span class="label">tons of solid waste per year</span></div>
+        <div class="stat"><span class="num">92%</span><span class="label">of LGUs with an approved 10-year solid-waste plan</span></div>
+        <div class="stat"><span class="num">269.55K</span><span class="label">tons of hazardous waste generated in 2024</span></div>
+      </div>
+
+      <p>There has been progress in local waste planning. As of 2025, the DENR-EMB reported that 1,459 of 1,592 cities, municipalities, and provinces — approximately 92% — had approved ten-year solid-waste management plans. Nevertheless, having an approved plan does not automatically mean that waste is properly segregated, collected, recycled, and disposed of in every community.</p>
+      <p>Hazardous waste is another concern. According to the Philippine Statistics Authority, the country generated 269.55 thousand tons of hazardous waste in 2024. Oil accounted for the largest share, followed by miscellaneous waste and waste containing inorganic chemicals. <span class="cite">(Philippine Statistics Authority, 2025)</span></p>
+      <p>These figures show that land pollution remains a serious environmental challenge. Addressing it requires proper segregation at source, reliable waste collection, functioning materials-recovery facilities, safe treatment of hazardous waste, enforcement against illegal dumping, and greater participation from households, businesses, industries, and local governments.</p>
+
+      <div class="refs" id="references">
+        <h2>References</h2>
+        <ol>
+          <li>Department of Environment and Natural Resources–Environmental Management Bureau. (2025). Philippine solid-waste management data reported through the Convention on Biological Diversity Online Reporting Tool. <a href="https://ort.cbd.int/database/record?documentID=292757">ort.cbd.int</a></li>
+          <li>Philippine Statistics Authority. (2025, July 10). Philippines generated 269.55 thousand tons of hazardous waste in 2024. <a href="https://psa.gov.ph/statistics/environment/peenra/node/1684077697">psa.gov.ph</a></li>
+          <li>Republic of the Philippines. (2001). Republic Act No. 9003: Ecological Solid Waste Management Act of 2000. The Lawphil Project. <a href="https://lawphil.net/statutes/repacts/ra2001/ra_9003_2001.html">lawphil.net</a></li>
+          <li>United Nations Environment Programme. (2020, December 4). Soil pollution is a risk to our health and food security. <a href="https://www.unep.org/news-and-stories/story/soil-pollution-risk-our-health-and-food-security">unep.org</a></li>
+          <li>United Nations Environment Programme. (2021). Global assessment of soil pollution. <a href="https://www.unep.org/resources/report/global-assessment-soil-pollution">unep.org</a></li>
+          <li>World Health Organization. (2024). Guidance on solid waste and health. <a href="https://www.who.int/tools/compendium-on-health-and-environment/solid-waste">who.int</a></li>
+        </ol>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer>Milestone 1 — Project purpose only</footer>
+
+</body>
+</html>
