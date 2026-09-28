@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lupang Hinirang... Lupang Nilalason</title>
+<link rel="icon" type="image/png" href="land-pollution-favicon.png">
+<link rel="apple-touch-icon" href="land-pollution-favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -41,50 +43,6 @@
   }
   img,svg{ max-width:100%; }
 
-  /* ---------- Nav ---------- */
-  nav.site-nav{
-    position: sticky;
-    top: env(safe-area-inset-top, 0px);
-    z-index: 50;
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 14px 28px;
-    background: rgba(33,28,22,0.94);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(159,183,28,0.35);
-  }
-  .brand{
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 17px;
-    letter-spacing: 0.02em;
-    color: var(--paper);
-    white-space: nowrap;
-  }
-  .brand em{ font-style: normal; color: var(--toxic); }
-  .nav-links{
-    display:flex;
-    gap: 4px;
-    flex-wrap: wrap;
-  }
-  .nav-links a{
-    font-family: var(--sans);
-    font-size: 14px;
-    color: rgba(239,231,216,0.82);
-    text-decoration: none;
-    padding: 8px 14px;
-    border-radius: 3px;
-    transition: color .15s ease, background .15s ease;
-  }
-  .nav-links a:hover,
-  .nav-links a:focus-visible{
-    color: var(--paper);
-    background: rgba(159,183,28,0.16);
-  }
-  .nav-links a:focus-visible{ outline: 2px solid var(--toxic); outline-offset: 2px; }
-
   /* ---------- Hero ---------- */
   section#home{
     min-height: 88vh;
@@ -92,31 +50,33 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
+    /* Dark overlay on the left keeps the title readable;
+       it thins out to the right so the dumpsite shows through. */
     background:
-      radial-gradient(ellipse at 78% 8%, rgba(159,183,28,0.16), transparent 50%),
-      radial-gradient(ellipse at 15% 90%, rgba(168,83,43,0.22), transparent 55%),
-      linear-gradient(180deg, #14150F 0%, #191A12 55%, #121309 100%);
+      linear-gradient(90deg, rgba(18,19,12,0.92) 0%, rgba(18,19,12,0.78) 40%, rgba(18,19,12,0.35) 100%),
+      linear-gradient(180deg, rgba(18,19,12,0.25) 0%, rgba(18,19,12,0.65) 100%),
+      url("philippines-land-pollution-background.png") center / cover no-repeat,
+      #14150F;
     color: var(--paper);
     padding: 90px 8vw 70px;
     overflow: hidden;
   }
   section#home::before{
-    /* subtle sludge/noise texture, self-contained SVG turbulence */
     content:"";
     position:absolute; inset:0;
-    opacity: 0.5;
+    opacity: 0.35;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
     pointer-events:none;
   }
   section#home::after{
-    /* thin hazard stripe along the base of the hero, like caution tape */
     content:"";
     position:absolute; left:0; right:0; bottom:0;
     height: 8px;
     background: repeating-linear-gradient(-45deg, var(--toxic) 0 18px, #14150F 18px 36px);
     opacity: 0.9;
   }
+  section#home > *{ position: relative; z-index: 1; }
   .hero-eyebrow{
     font-family: var(--display);
     font-size: 13px;
@@ -133,9 +93,7 @@
     margin: 0;
     font-size: clamp(2.6rem, 7.2vw, 6rem);
     max-width: 15ch;
-  }
-  .hero-title .fade{
-    color: rgba(239,231,216,0.34);
+    text-shadow: 0 2px 24px rgba(0,0,0,0.45);
   }
   .hero-title .stark{
     color: var(--paper);
@@ -152,7 +110,7 @@
     font-family: var(--sans);
     font-size: 16px;
     line-height: 1.65;
-    color: rgba(239,231,216,0.78);
+    color: rgba(239,231,216,0.88);
     max-width: 52ch;
     margin: 0 0 30px;
   }
@@ -182,14 +140,6 @@
   .content-wrap{
     max-width: 760px;
     margin: 0 auto;
-  }
-  .page-kicker{
-    font-family: var(--display);
-    font-size: 13px;
-    letter-spacing: 0.05em;
-    color: var(--rust);
-    font-weight: 500;
-    margin: 0 0 10px;
   }
   h1.page-title{
     font-family: var(--serif);
@@ -290,6 +240,106 @@
     line-height: 1.4;
   }
 
+  /* ---------- Regional ranking chart ---------- */
+  .region-chart{
+    margin: 18px 0 14px;
+    padding: 22px 22px 16px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .region-chart figcaption{
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ash);
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+  .region-list{
+    list-style: none;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .region-row{
+    display: grid;
+    grid-template-columns: 1.6rem minmax(0, 1fr);
+    column-gap: 10px;
+    margin-bottom: 16px !important;
+  }
+  .region-rank{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--rust);
+    padding-top: 2px;
+  }
+  .region-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-family: var(--sans);
+    font-size: 14.5px;
+    line-height: 1.35;
+    margin-bottom: 6px;
+  }
+  .region-name{ font-weight: 600; color: var(--ink); }
+  .region-name small{ font-weight: 400; color: var(--ash); font-size: 12.5px; }
+  .region-value{
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--soil);
+    white-space: nowrap;
+  }
+  .region-value span{ font-family: var(--sans); font-size: 12px; color: var(--ash); font-weight: 400; }
+  .bar{
+    height: 12px;
+    background: rgba(27,28,21,0.08);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .bar i{
+    display: block;
+    height: 100%;
+    width: var(--w);
+    background: linear-gradient(90deg, var(--soil), var(--rust));
+  }
+  .region-row:first-child .bar i{ background: linear-gradient(90deg, var(--rust), #7d3515); }
+
+  .update-note{
+    border-left: 3px solid var(--toxic);
+    background: rgba(159,183,28,0.10);
+    padding: 16px 20px;
+    margin: 22px 0 30px;
+  }
+  .update-note p{ margin: 0; font-size: 16.5px; }
+
+  /* ---------- Video ---------- */
+  .video-frame{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #14150F;
+    border: 1px solid var(--line);
+    margin: 8px 0 10px;
+  }
+  .video-frame iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .video-link{
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ash);
+    margin: 0 0 20px;
+  }
+  .video-link a{ color: var(--soil); }
+
   /* references */
   .refs{
     margin-top: 60px;
@@ -316,9 +366,17 @@
   }
 
   @media (max-width: 640px){
-    nav.site-nav{ padding: 12px 16px; flex-wrap: wrap; }
-    section#home{ padding: 70px 6vw 56px; min-height: 78vh; }
+    section#home{
+      padding: 70px 6vw 56px;
+      min-height: 78vh;
+      background:
+        linear-gradient(180deg, rgba(18,19,12,0.70) 0%, rgba(18,19,12,0.88) 100%),
+        url("philippines-land-pollution-background.png") 70% center / cover no-repeat,
+        #14150F;
+    }
     section#land-pollution{ padding: 56px 6vw 70px; }
+    .region-chart{ padding: 18px 14px 12px; }
+    .region-head{ flex-direction: column; gap: 2px; }
   }
 </style>
 </head>
@@ -345,6 +403,8 @@
         <li><a href="#causes">Causes of Land Pollution</a></li>
         <li><a href="#effects">Effects of Land Pollution</a></li>
         <li><a href="#status">Current Status</a></li>
+        <li><a href="#regions">Top 5 Waste-Generating Regions</a></li>
+        <li><a href="#video">Watch the Video</a></li>
         <li><a href="#references">References</a></li>
       </ol>
     </div>
@@ -401,14 +461,98 @@
 
       <p>There has been progress in local waste planning. As of 2025, the DENR-EMB reported that 1,459 of 1,592 cities, municipalities, and provinces — approximately 92% — had approved ten-year solid-waste management plans. Nevertheless, having an approved plan does not automatically mean that waste is properly segregated, collected, recycled, and disposed of in every community.</p>
       <p>Hazardous waste is another concern. According to the Philippine Statistics Authority, the country generated 269.55 thousand tons of hazardous waste in 2024. Oil accounted for the largest share, followed by miscellaneous waste and waste containing inorganic chemicals. <span class="cite">(Philippine Statistics Authority, 2025)</span></p>
+      <p>Disposal facilities are also under pressure. In 2024, the country had 12,855 materials recovery facilities and 343 sanitary landfills, but the number of reported illegal dumpsites nearly doubled, from 43 in 2023 to 79 in 2024. <span class="cite">(Philippine Statistics Authority, 2025)</span></p>
+
+      <h2 id="regions">Top 5 Waste-Generating Regions</h2>
+      <p>Waste is not spread evenly across the country. It is concentrated in the most populated and urbanised regions, especially Metro Manila and the provinces around it. The National Solid Waste Management Commission's regional estimates show that just five of the country's 17 regions produced more than half of all solid waste.</p>
+
+      <figure class="region-chart" aria-labelledby="region-chart-caption">
+        <ol class="region-list">
+          <li class="region-row">
+            <span class="region-rank">1</span>
+            <div>
+              <div class="region-head">
+                <span class="region-name">National Capital Region <small>(Metro Manila)</small></span>
+                <span class="region-value">9,212.92 <span>tons/day · 23.0%</span></span>
+              </div>
+              <div class="bar"><i style="--w:100%"></i></div>
+            </div>
+          </li>
+          <li class="region-row">
+            <span class="region-rank">2</span>
+            <div>
+              <div class="region-head">
+                <span class="region-name">Region IV-A <small>(CALABARZON)</small></span>
+                <span class="region-value">4,440.15 <span>tons/day · 11.1%</span></span>
+              </div>
+              <div class="bar"><i style="--w:48.2%"></i></div>
+            </div>
+          </li>
+          <li class="region-row">
+            <span class="region-rank">3</span>
+            <div>
+              <div class="region-head">
+                <span class="region-name">Region III <small>(Central Luzon)</small></span>
+                <span class="region-value">3,890.12 <span>tons/day · 9.7%</span></span>
+              </div>
+              <div class="bar"><i style="--w:42.2%"></i></div>
+            </div>
+          </li>
+          <li class="region-row">
+            <span class="region-rank">4</span>
+            <div>
+              <div class="region-head">
+                <span class="region-name">Region VI <small>(Western Visayas)</small></span>
+                <span class="region-value">2,892.04 <span>tons/day · 7.2%</span></span>
+              </div>
+              <div class="bar"><i style="--w:31.4%"></i></div>
+            </div>
+          </li>
+          <li class="region-row">
+            <span class="region-rank">5</span>
+            <div>
+              <div class="region-head">
+                <span class="region-name">Region VII <small>(Central Visayas)</small></span>
+                <span class="region-value">2,790.86 <span>tons/day · 7.0%</span></span>
+              </div>
+              <div class="bar"><i style="--w:30.3%"></i></div>
+            </div>
+          </li>
+        </ol>
+        <figcaption id="region-chart-caption">Estimated solid waste generation by region, 2016, in tons per day. Percentages are each region's share of the national total of 40,087.45 tons per day. Source: National Solid Waste Management Commission, as reported by the Senate Economic Planning Office (2017).</figcaption>
+      </figure>
+
+      <p>Together, these five regions generated about 23,226 tons of waste per day, or roughly 58% of the national total. Metro Manila alone, with about 12 million residents at the time, produced more waste than CALABARZON and Central Luzon combined.</p>
+
+      <div class="update-note">
+        <p><strong>Newer figures show a change at the top.</strong> In 2026, the EMB reported that the country produces around 61,700 tons of waste per day. CALABARZON now generates the most, at 9,994 tons per day, followed by the National Capital Region at 9,369 tons per day. The two regions together account for about 31% of the country's daily waste. <span class="cite">(Philippine Information Agency, 2026)</span></p>
+      </div>
+
+      <p>CALABARZON, made up of Cavite, Laguna, Batangas, Rizal, and Quezon, now has a population of more than 16 million, and its waste generation has more than doubled since 2016. <span class="cite">(Philippine Information Agency, 2026)</span></p>
+
+      <h2 id="video">Watch the Video</h2>
+      <p>This video gives a closer look at the issue of land pollution.</p>
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/mFslA0GxNEQ"
+          title="YouTube video on land pollution"
+          loading="lazy"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <p class="video-link">If the video does not load, <a href="https://www.youtube.com/watch?v=mFslA0GxNEQ" target="_blank" rel="noopener">watch it on YouTube</a>.</p>
+
       <p>These figures show that land pollution remains a serious environmental challenge. Addressing it requires proper segregation at source, reliable waste collection, functioning materials-recovery facilities, safe treatment of hazardous waste, enforcement against illegal dumping, and greater participation from households, businesses, industries, and local governments.</p>
 
       <div class="refs" id="references">
         <h2>References</h2>
         <ol>
           <li>Department of Environment and Natural Resources–Environmental Management Bureau. (2025). Philippine solid-waste management data reported through the Convention on Biological Diversity Online Reporting Tool. <a href="https://ort.cbd.int/database/record?documentID=292757">ort.cbd.int</a></li>
+          <li>Philippine Information Agency. (2026, July 2). CALABARZON Regional Ecology Center pushes for inter-agency solid waste management efforts. <a href="https://pia.gov.ph/news/calabarzon-regional-ecology-center-pushes-for-inter-agency-solid-waste-management-efforts/">pia.gov.ph</a></li>
           <li>Philippine Statistics Authority. (2025, July 10). Philippines generated 269.55 thousand tons of hazardous waste in 2024. <a href="https://psa.gov.ph/statistics/environment/peenra/node/1684077697">psa.gov.ph</a></li>
           <li>Republic of the Philippines. (2001). Republic Act No. 9003: Ecological Solid Waste Management Act of 2000. The Lawphil Project. <a href="https://lawphil.net/statutes/repacts/ra2001/ra_9003_2001.html">lawphil.net</a></li>
+          <li>Senate Economic Planning Office. (2017, November). At a glance: Philippine solid wastes (AG-17-01). Senate of the Philippines. <a href="https://legacy.senate.gov.ph/publications/SEPO/AAG_Philippine%20Solid%20Wastes_Nov2017.pdf">senate.gov.ph</a></li>
           <li>United Nations Environment Programme. (2020, December 4). Soil pollution is a risk to our health and food security. <a href="https://www.unep.org/news-and-stories/story/soil-pollution-risk-our-health-and-food-security">unep.org</a></li>
           <li>United Nations Environment Programme. (2021). Global assessment of soil pollution. <a href="https://www.unep.org/resources/report/global-assessment-soil-pollution">unep.org</a></li>
           <li>World Health Organization. (2024). Guidance on solid waste and health. <a href="https://www.who.int/tools/compendium-on-health-and-environment/solid-waste">who.int</a></li>
