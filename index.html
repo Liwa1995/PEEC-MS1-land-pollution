@@ -57,7 +57,7 @@
 
   /* ---------- Hero ---------- */
   section#home{
-    min-height: 88vh;
+    min-height: 60vh;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -68,7 +68,7 @@
       linear-gradient(90deg, rgba(18,19,12,0.72) 0%, rgba(18,19,12,0.50) 38%, rgba(18,19,12,0.12) 70%, rgba(18,19,12,0) 100%),
       linear-gradient(180deg, rgba(18,19,12,0) 60%, rgba(18,19,12,0.45) 100%);
     color: var(--paper);
-    padding: 90px 8vw 70px;
+    padding: 64px 8vw 56px;
     overflow: hidden;
   }
   section#home::before{
@@ -102,8 +102,8 @@
     font-weight: 700;
     line-height: 1.04;
     margin: 0;
-    font-size: clamp(2.6rem, 7.2vw, 6rem);
-    max-width: 15ch;
+    font-size: clamp(2.2rem, 5vw, 4.25rem);
+    max-width: 20ch;
     text-shadow: 0 2px 4px rgba(0,0,0,0.55), 0 4px 28px rgba(0,0,0,0.6);
   }
   .hero-title .stark{
@@ -114,7 +114,7 @@
     width: 120px;
     height: 3px;
     background: linear-gradient(90deg, var(--toxic), var(--rust));
-    margin: 34px 0 22px;
+    margin: 24px 0 16px;
     border: none;
   }
   .hero-sub{
@@ -385,8 +385,8 @@
 
   @media (max-width: 640px){
     section#home{
-      padding: 70px 6vw 56px;
-      min-height: 78vh;
+      padding: 56px 6vw 44px;
+      min-height: 55vh;
       background: linear-gradient(180deg, rgba(18,19,12,0.45) 0%, rgba(18,19,12,0.70) 100%);
     }
     body::before{ background-position: 70% center; }
